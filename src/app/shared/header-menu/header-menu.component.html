@@ -27,7 +27,7 @@
     <mat-toolbar>
       <mat-icon (click)="toggleSideNav()" class="cursor-pointer mr-sm-3" aria-label="Abre/Cierra menú lateral">menu</mat-icon>
       <div class="w-100 m-0 p-0 d-flex justify-content-end justify-content-sm-between">
-        <img src="../../../assets/img/logo-menu.png" class="cursor-pointer" [routerLink]="['/home']" />
+        <img src="assets/img/logo-menu.png" class="cursor-pointer" [routerLink]="['/home']" />
         <button *ngIf="!mobileQuery.matches" mat-button [routerLink]="['/login']">
           <mat-icon>exit_to_app</mat-icon>
           Cerrar sesión
