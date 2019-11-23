@@ -1,0 +1,140 @@
+<div class="container-fluid py-3 animated fadeIn">
+  <button type="button" mat-stroked-button class="mr-3">
+    <mat-icon>filter_list</mat-icon>
+    &nbsp; Fecha Inicio
+  </button>
+  <button type="button" mat-stroked-button>
+    <mat-icon>filter_list</mat-icon>
+    &nbsp; Fecha Fin
+  </button>
+  <div class="row pt-3">
+    <div class="col-12 col-lg-6">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <mat-icon>call_missed</mat-icon>
+            &nbsp; Ordenes desde
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <mat-form-field class="w-100">
+          <mat-label>Tiendas</mat-label>
+          <mat-select multiple>
+            <mat-option *ngFor="let store of stores" [value]="store">{{ store }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="w-100">
+          <mat-label>Estatus</mat-label>
+          <mat-select>
+            <mat-option *ngFor="let elem of status" [value]="elem.value">
+              {{ elem.viewValue }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="w-50 pr-2">
+          <input matInput placeholder="Referencia..." />
+        </mat-form-field>
+        <mat-form-field class="w-50 pl-2">
+          <input matInput placeholder="Cliente..." />
+        </mat-form-field>
+        <mat-checkbox>Agrupar carritos de Mercado Libre</mat-checkbox>
+      </mat-expansion-panel>
+    </div>
+    <div class="col-12 col-lg-6 mt-3 mt-sm-0">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <mat-icon>call_missed_outgoing</mat-icon>
+            &nbsp; Ordenes hasta
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <mat-form-field class="w-100">
+          <mat-label>Empresas</mat-label>
+          <mat-select multiple>
+            <mat-option *ngFor="let company of companies" [value]="company">{{ company }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="w-50 pr-2">
+          <mat-label>Estatus</mat-label>
+          <mat-select>
+            <mat-option *ngFor="let elem of status2" [value]="elem.value">
+              {{ elem.viewValue }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="w-50 pl-2">
+          <mat-label>Clasificación</mat-label>
+          <mat-select>
+            <mat-option *ngFor="let elem of classification" [value]="elem.value">
+              {{ elem.viewValue }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="w-100">
+          <input matInput placeholder="Referencia..." />
+        </mat-form-field>
+      </mat-expansion-panel>
+    </div>
+  </div>
+  <div class="w-100 mt-3 d-flex justify-content-center">
+    <button type="button" mat-stroked-button class="mr-3">
+      <mat-icon>call_made</mat-icon>
+      &nbsp; Exportar
+    </button>
+    <button type="button" mat-stroked-button class="mr-3">
+      <mat-icon>layers</mat-icon>
+      &nbsp; Etiquetas
+    </button>
+    <button type="button" mat-stroked-button>
+      <mat-icon>insert_drive_file</mat-icon>
+      &nbsp; Facturas
+    </button>
+  </div>
+  <nav *ngIf="totalProds > 0 && !initialLoading" class="mt-3 d-flex justify-content-center" aria-label="Paginación de productos">
+    <ul class="pagination">
+      <li (click)="changePage(actualPage - 1)" class="page-item cursor-pointer">
+        <a class="page-link" role="button" aria-label="Anterior">
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+      </li>
+      <li *ngFor="let page of totalPagesAux; let i = index" [ngClass]="{ active: i + 1 === actualPage }" (click)="changePage(i + 1)" class="page-item cursor-pointer">
+        <a role="button" class="page-link">{{ i + 1 }}</a>
+      </li>
+      <li (click)="changePage(actualPage + 1)" class="page-item cursor-pointer">
+        <a class="page-link" role="button" aria-label="Siguiente">
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+  <div *ngIf="loading" class="container-fluid py-3 animated fadeIn">
+    Cargando...
+  </div>
+  <table *ngIf="totalProds > 0 && !loading" class="table table-striped table-hover mt-3 products animated fadeIn" cellpadding="10">
+    <thead>
+      <tr>
+        <th scope="col"></th>
+        <th scope="col">ID</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Imagen</th>
+        <th scope="col">Precio</th>
+        <th scope="col">Stock</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of products; let i = index">
+        <th scope="row">
+          <a role="button" [routerLink]="['/producto', product.pk]">{{ i + 1 }}</a>
+        </th>
+        <td>{{ product.sku }}</td>
+        <td>{{ product.name }}</td>
+        <td>
+          <img [src]="product.images[0].url_source" class="img-thumbnail" />
+        </td>
+        <td>{{ product.price | currency: 'MXN' }}</td>
+        <td>{{ product.stock }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

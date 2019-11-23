@@ -1,0 +1,40 @@
+<mat-sidenav-container class="sidenav-container animated fadeIn">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport="true" role="navigation" [opened]="!mobileQuery.matches ? true : false" mode="side">
+    <mat-toolbar class="justify-content-between">
+      MENÚ
+      <mat-icon *ngIf="mobileQuery.matches" (click)="toggleSideNav()" aria-label="Abre/Cierra menú lateral">clear</mat-icon>
+    </mat-toolbar>
+    <mat-list (click)="toggleSideNav()">
+      <mat-list-item [routerLink]="['/home']" routerLinkActive="active">
+        <mat-icon>home</mat-icon>
+        &nbsp; Inicio
+      </mat-list-item>
+      <mat-list-item [routerLink]="['/ordenes']" routerLinkActive="active">
+        <mat-icon>shopping_cart</mat-icon>
+        &nbsp; Ordenes
+      </mat-list-item>
+      <mat-list-item [routerLink]="['/mensajes']" routerLinkActive="active">
+        <mat-icon>chat_bubble_outline</mat-icon>
+        &nbsp; Mensajes
+      </mat-list-item>
+      <mat-list-item *ngIf="mobileQuery.matches" [routerLink]="['/login']" routerLinkActive="active">
+        <mat-icon>exit_to_app</mat-icon>
+        &nbsp; Cerrar sesión
+      </mat-list-item>
+    </mat-list>
+  </mat-sidenav>
+  <mat-sidenav-content role="main">
+    <mat-toolbar>
+      <mat-icon (click)="toggleSideNav()" class="cursor-pointer mr-sm-3" aria-label="Abre/Cierra menú lateral">menu</mat-icon>
+      <div class="w-100 m-0 p-0 d-flex justify-content-end justify-content-sm-between">
+        <img src="../../../assets/img/logo-menu.png" class="cursor-pointer" [routerLink]="['/home']" />
+        <button *ngIf="!mobileQuery.matches" mat-button [routerLink]="['/login']">
+          <mat-icon>exit_to_app</mat-icon>
+          Cerrar sesión
+        </button>
+      </div>
+    </mat-toolbar>
+    <!-- Contenido de la Intranet -->
+    <ng-content></ng-content>
+  </mat-sidenav-content>
+</mat-sidenav-container>

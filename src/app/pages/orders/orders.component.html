@@ -1,0 +1,32 @@
+<mat-tab-group dynamicHeight mat-align-tabs="center">
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon class="example-tab-icon">shopping_cart</mat-icon>
+      &nbsp;
+      <span [matBadge]="dataBadge" matBadgeOverlap="false">Ordenes</span>
+    </ng-template>
+    <ng-template matTabContent>
+      <app-data-order></app-data-order>
+    </ng-template>
+  </mat-tab>
+
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon class="example-tab-icon">all_inbox</mat-icon>
+      &nbsp; Detalle Orden 1
+    </ng-template>
+    <ng-template matTabContent>
+      The Second Content
+    </ng-template>
+  </mat-tab>
+
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon class="example-tab-icon">all_inbox</mat-icon>
+      &nbsp; Detalle Orden 2
+    </ng-template>
+    <ng-template matTabContent>
+      The Third Content
+    </ng-template>
+  </mat-tab>
+</mat-tab-group>

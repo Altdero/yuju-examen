@@ -1,0 +1,13 @@
+.img-thumbnail {
+  width: 78px !important;
+  height: 78px !important;
+}
+
+@media (max-width: 575.98px) {
+  .products {
+    width: 100%;
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}

@@ -1,0 +1,28 @@
+.sidenav-container {
+  height: 100%;
+}
+.sidenav {
+  background-color: #fafafa !important;
+}
+.mat-toolbar.mat-primary {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  height: 80px;
+}
+.mat-list-item {
+  cursor: pointer;
+}
+.mat-list-item.active {
+  font-weight: bold !important;
+}
+
+/* ======================================================== */
+/* DISEÑO RESPONSIVO */
+/* ======================================================== */
+/* Extra small devices (portrait phones, less than 576px) */
+@media (max-width: 575.98px) {
+  .sidenav {
+    width: 100% !important;
+  }
+}

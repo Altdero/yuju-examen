@@ -1,0 +1,106 @@
+<div class="container-fluid h-100 d-flex justify-content-center align-items-center animated fadeIn bg-dark">
+  <div class="login-container px-0 px-sm-3 card text-center shadow">
+    <div class="card-body">
+      <img src="../../assets/img/logo.png" class="sm-logo mb-2" />
+      <h5 class="card-title mb-4">Ingresa tus credenciales</h5>
+      <form [formGroup]="loginCredentials" (ngSubmit)="access()">
+        <div class="form-group mb-3">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text bg-dark">
+                <i class="material-icons text-white">perm_identity</i>
+              </div>
+            </div>
+            <input
+              [ngClass]="{
+                'is-invalid': loginCredentials.controls.user.invalid && loginCredentials.controls.user.dirty
+              }"
+              type="text"
+              class="form-control"
+              name="user"
+              autocomplete="username"
+              placeholder="User"
+              formControlName="user"
+              required
+              aria-describedby="userHelper"
+            />
+            <div *ngIf="loginCredentials.controls.user.errors?.required && loginCredentials.controls.user.dirty" class="invalid-tooltip text-left fadeIn animated">
+              El campo es requerido
+            </div>
+          </div>
+          <small id="userHelper" class="form-text text-muted text-left">
+            Tip: "usuario o invitado"
+          </small>
+        </div>
+        <div class="form-group mb-3">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text bg-dark">
+                <i class="material-icons text-white">vpn_key</i>
+              </div>
+            </div>
+            <input
+              [ngClass]="{
+                'is-invalid': loginCredentials.controls.password.invalid && loginCredentials.controls.password.dirty
+              }"
+              [type]="hide ? 'password' : 'text'"
+              class="form-control"
+              name="password"
+              autocomplete="current-password"
+              placeholder="Password"
+              formControlName="password"
+              required
+              aria-describedby="passwordHelper"
+            />
+            <div *ngIf="loginCredentials.controls.password.errors?.required && loginCredentials.controls.password.dirty" class="invalid-tooltip text-left fadeIn animated">
+              El campo es requerido
+            </div>
+            <div (click)="hide = !hide" class="input-group-append cursor-pointer">
+              <div class="input-group-text bg-dark">
+                <i class="material-icons text-white" [title]="hide ? 'Mostrar contraseña' : 'Ocultar contraseña'">{{ hide ? 'visibility_off' : 'visibility' }}</i>
+              </div>
+            </div>
+          </div>
+          <small id="passwordHelper" class="form-text text-muted text-left">
+            Tip: "123456"
+          </small>
+        </div>
+        <div class="form-group mb-3">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text bg-dark">
+                <i class="material-icons text-white">fingerprint</i>
+              </div>
+            </div>
+            <input
+              [ngClass]="{
+                'is-invalid': loginCredentials.controls.tokenYuju.invalid && loginCredentials.controls.tokenYuju.dirty
+              }"
+              type="text"
+              class="form-control"
+              id="tokenYuju"
+              placeholder="Yuju token"
+              formControlName="tokenYuju"
+              aria-describedby="tokenYujuHelper"
+            />
+          </div>
+          <small id="tokenYujuHelper" class="form-text text-muted text-left">
+            Tip: Utiliza tu propio token o deja el que está
+          </small>
+        </div>
+        <p *ngIf="error" class="text-danger animated fadeInDown">
+          {{ errorMessage }}
+        </p>
+        <div class="d-flex justify-content-center">
+          <button [disabled]="loginCredentials.invalid" type="submit" class="btn btn-block btn-success">
+            Entrar
+          </button>
+          &nbsp;&nbsp;&nbsp;
+          <button (click)="loginCredentials.reset()" type="button" class="btn btn-block btn-danger mt-0">
+            Limpiar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
